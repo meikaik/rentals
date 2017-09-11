@@ -11,8 +11,7 @@ class UsersController < ApplicationController
       email: params[:user][:email],
       password: params[:user][:password]
     )
-    @user.save
-    redirect_to user_path(@user.id)
+    redirect_to user_path(@user.id) if @user.save
   end
 
   def show
@@ -28,7 +27,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to 'http://www.google.com'
+    redirect_to 'http://www.shopify.com'
   end
 
 end
