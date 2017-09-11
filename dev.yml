@@ -1,0 +1,30 @@
+name: onboarding
+
+up:
+  - homebrew:
+    - openssl
+  - ruby:
+      version: 2.3.0
+  - railgun
+  - bundler
+
+commands:
+  console:
+    desc:   'Start a rails console'
+    run:    bin/rails console
+  server:
+    desc:   'Start the server'
+    run:    bundle exec rails s -p 3084 -b 0.0.0.0
+
+railgun:
+  image: dev:railgun-common-services-0.2.x
+  services:
+    nginx:           80
+  ip_address: 192.168.64.17
+  memory: 2G
+  cores: 2
+  disk: 2G
+  proxy:
+    rentals.myshopify.io:       3084
+  hostnames:
+    - rentals.myshopify.io
