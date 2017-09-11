@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get 'dashboards/hello' => 'dashboards#hello'
+  get 'dashboards/hi' => 'dashboards#hi'
+  get 'dashboards/personalized/:name' => 'dashboards#personalized'
+  get 'dashboards/reversed/:name' => 'dashboards#reversed'
 end
