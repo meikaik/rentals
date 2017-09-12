@@ -12,7 +12,12 @@ class UsersController < ApplicationController
       password: params[:user][:password]
     )
     session[:current_user_id] = @user.id
-    redirect_to user_path(@user.id) if @user.save
+    if @user.save
+      flash[:notice] = "Successfully created user: #{@user.first_name}"
+      redirect_to user_path(@user.id)
+    else
+      flash[:alert] = 'Invalid user credentials!'
+    end
   end
 
   def show
@@ -22,6 +27,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update_attributes(params.require(:user).permit(:email, :first_name, :last_name, :password))
+    flash[:notice] = "User #{@user.first_name} updated!"
     redirect_to user_path(@user.id)
   end
 
