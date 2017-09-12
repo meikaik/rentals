@@ -1,5 +1,6 @@
 <h1> Profile </h1>
 
+<%=link_to "Logout", logout_path, method: :delete %>
 <%=link_to "Delete user", @user, method: :delete %>
 
 <%= form_for @user do |f| %>
@@ -9,6 +10,8 @@
   <%= f.text_field :last_name, required: true, class: 'form-control' %>
   <%= f.label :email %>
   <%= f.email_field :email, required: true, class: 'form-control' %>
+  <%= f.label :password %>
+  <%= f.password_field :password, required: true, class: 'form-control' %>
   <%= f.submit "Update", class: "btn btn-primary" %>
 <% end %>
 

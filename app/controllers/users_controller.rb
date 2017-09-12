@@ -11,6 +11,7 @@ class UsersController < ApplicationController
       email: params[:user][:email],
       password: params[:user][:password]
     )
+    session[:current_user_id] = @user.id
     redirect_to user_path(@user.id) if @user.save
   end
 
@@ -20,7 +21,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update_attributes(params.require(:user).permit(:email, :first_name, :last_name))
+    @user.update_attributes(params.require(:user).permit(:email, :first_name, :last_name, :password))
     redirect_to user_path(@user.id)
   end
 
