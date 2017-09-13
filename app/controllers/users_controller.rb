@@ -16,7 +16,8 @@ class UsersController < ApplicationController
       flash[:notice] = "Successfully created user: #{@user.first_name}"
       redirect_to user_path(@user.id)
     else
-      flash[:alert] = 'Invalid user credentials!'
+      flash.now[:alert] = 'Invalid user credentials!'
+      render :new
     end
   end
 
