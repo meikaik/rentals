@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   get 'shop' => 'multipass#authenticate_store'
 
   get 'rentals/new/:product_id' => 'rentals#new'
+  post 'rentals/new' => 'rentals#create'
 end

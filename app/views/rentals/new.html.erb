@@ -1,3 +1,53 @@
+<script src="http://sdks.shopifycdn.com/js-buy-sdk/latest/shopify-buy.polyfilled.globals.js"></script>
+<script language="javascript">
+  var shopClient = ShopifyBuy.buildClient({
+    apiKey: '<%=Figaro.env.STOREFRONT_API_TOKEN %>',
+    domain: '<%=Figaro.env.SHOP_FULL_NAME %>',
+    appId: '6'
+  });
+
+  var product;
+
+  function goCheckout() {
+    shopClient.fetchProduct(<%=params[:product_id] %>).then(function (fetchedProduct) {
+      product = fetchedProduct;
+      var e = document.getElementById("variant_id");
+      var duration = document.getElementById("duration").value;
+      var variant_id = e.options[e.selectedIndex].value;
+      var variant = getVariant(product, variant_id);
+
+      window.shopClient.createCart().then(function (newCart) {
+        checkoutVariant(newCart, variant, duration);
+      });
+    });
+  }
+
+
+  function checkoutVariant(cart, variant, duration) {
+    cart.addVariants({variant: variant, quantity: duration}).then(function (cart) {
+     $.ajax({
+        url: "/rentals/new",
+        type: "POST",
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        data: {
+          "product_id" : product.id,
+          "variant_id" : variant.id,
+          "checkout_url" : cart.checkoutUrl,
+          "duration" : duration
+        }
+      });
+    });
+  }
+
+  function getVariant(product, variant_id) {
+    for (var i = 0; i < product.variants.length; i++) {
+      if (product.variants[i].id == variant_id) {
+        return product.variants[i];
+      }
+    }
+  }
+</script>
+
 <div>
   <p> You've selected to rent... </p>
   <br>
@@ -5,4 +55,8 @@
   <br>
   <p> Variant </p>
   <%= select_tag :variant_id, options_for_select(@variants.collect{ |v| [v.title, v.id] }) %>
+  <br>
+  <%= number_field_tag :duration, 1, min: 1 %>
+  <br>
+  <button onclick="goCheckout()">Rent</button>
 </div>
