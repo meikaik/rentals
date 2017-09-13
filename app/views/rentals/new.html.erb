@@ -1,0 +1,8 @@
+<div>
+  <p> You've selected to rent... </p>
+  <br>
+  <p> Please select a starting date and rental period below </p>
+  <br>
+  <p> Variant </p>
+  <%= select_tag :variant_id, options_for_select(@variants.collect{ |v| [v.title, v.id] }) %>
+</div>
