@@ -23,6 +23,8 @@ gem 'coffee-rails', '~> 4.2'
 
 # Use bootstrap
 gem 'bootstrap', '~> 4.0.0.alpha6'
+# Fix for bootstrap issues
+gem 'popper_js', '~> 1.11.1'
 gem 'autoprefixer-rails'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

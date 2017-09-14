@@ -1,9 +1,10 @@
 <h1>Log In</h1>
-
-<%= form_for(:session, url: login_path) do |f| %>
-  <%= f.label :email %>
-  <%= f.email_field :email, required: true, class: 'form-control' %>
-  <%= f.label :password %>
-  <%= f.password_field :password, required: true, class: 'form-control' %>
-  <%= f.submit "Log In!", class: "btn btn-primary" %>
-<% end %>
+<div class="form">
+  <%= form_for(:session, url: login_path) do |f| %>
+    <%= f.label :email %>
+    <%= f.email_field :email, required: true, class: 'form-control' %>
+    <%= f.label :password %>
+    <%= f.password_field :password, required: true, class: 'form-control' %>
+    <%= f.submit "Log In!", class: "btn btn-primary" %>
+  <% end %>
+</div>

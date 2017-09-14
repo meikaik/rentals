@@ -49,13 +49,16 @@
 </script>
 
 <div>
-  <p> You've selected to rent... </p>
+  <p> You've selected to rent:
+    <strong><%= ShopifyAPI::Product.find(params[:product_id]).title %></strong>
+  </p>
   <br>
   <p> Please select a starting date and rental period below </p>
   <br>
-  <p> Variant </p>
+  <p> Variant: </p>
   <%= select_tag :variant_id, options_for_select(@variants.collect{ |v| [v.title, v.id] }) %>
   <br>
+  <p> Duration (in days):
   <%= number_field_tag :duration, 1, min: 1 %>
   <br>
   <button onclick="goCheckout()">Rent</button>

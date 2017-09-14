@@ -2,17 +2,16 @@
 
 <%=link_to "Logout", logout_path, method: :delete %>
 <%=link_to "Delete user", @user, method: :delete %>
-
-<%= form_for @user do |f| %>
-  <%= f.label :first_name %>
-  <%= f.text_field :first_name, required: true, class: 'form-control' %>
-  <%= f.label :last_name %>
-  <%= f.text_field :last_name, required: true, class: 'form-control' %>
-  <%= f.label :email %>
-  <%= f.email_field :email, required: true, class: 'form-control' %>
-  <%= f.label :password %>
-  <%= f.password_field :password, required: true, class: 'form-control' %>
-  <%= f.submit "Update", class: "btn btn-primary" %>
-<% end %>
-
-
+<div class="form">
+  <%= form_for @user do |f| %>
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, required: true, class: 'form-control' %>
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, required: true, class: 'form-control' %>
+    <%= f.label :email %>
+    <%= f.email_field :email, required: true, class: 'form-control' %>
+    <%= f.label :password %>
+    <%= f.password_field :password, required: true, class: 'form-control' %>
+    <%= f.submit "Update", class: "btn btn-primary" %>
+  <% end %>
+</div>
