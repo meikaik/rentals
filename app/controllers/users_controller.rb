@@ -11,9 +11,10 @@ class UsersController < ApplicationController
       email: params[:user][:email],
       password: params[:user][:password]
     )
-    session[:current_user_id] = @user.id
     if @user.save
       flash[:notice] = "Successfully created user: #{@user.first_name}"
+      session[:current_user_id] = @user.id
+      @current_user = @user
       redirect_to user_path(@user.id)
     else
       flash.now[:alert] = 'Invalid user credentials!'

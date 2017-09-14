@@ -34,8 +34,9 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 # Use figaro for ENV variables
 gem 'figaro'
-
 gem 'shopify_api'
+gem 'sidekiq', '~> 5.0', '>= 5.0.4'
+gem 'clockwork', '~> 2.0'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
