@@ -35,11 +35,15 @@ gem 'jbuilder', '~> 2.5'
 # Use figaro for ENV variables
 gem 'figaro'
 gem 'shopify_api'
-gem 'sidekiq', '~> 5.0', '>= 5.0.4'
 gem 'clockwork', '~> 2.0'
 
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
+# Used for Sidekiq
+gem 'sidekiq', '~> 5.0', '>= 5.0.4'
+gem 'slim', '~> 3.0', '>= 3.0.8'
+gem 'sinatra', '~> 2.0'
+
+#Use Redis adapter to run Action Cable in production
+gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

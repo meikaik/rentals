@@ -13,8 +13,12 @@ class RentalsController < ApplicationController
       start_date: Time.now,
       duration: params["duration"]
     )
-
     redirect_to params["checkout_url"]
+  end
+
+  def destroy
+    Rental.find(params[:id]).destroy
+    redirect_to root_path
   end
 
 end

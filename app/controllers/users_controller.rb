@@ -36,7 +36,8 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to 'http://www.shopify.com'
+    session[:current_user_id] = nil
+    redirect_to login_path
   end
 
 end

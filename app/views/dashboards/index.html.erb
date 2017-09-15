@@ -10,18 +10,24 @@
           <th>Start Date</th>
           <th>Due Date</th>
           <th>Status</th>
+          <th>Return Rental</th>
         </tr>
       </thead>
       <tbody>
       <% @current_user.rentals.each do |rental| %>
         <% product = ShopifyAPI::Product.find(rental.product_id) %>
         <% variant = ShopifyAPI::Variant.find(rental.variant_id) %>
-        <% rental_end_date = rental.start_date + rental.duration.day %>
-        <% rental_remaining = rental_end_date - Time.now %>
+        <% rental_start_date = rental.start_date.localtime %>
+        <% rental_end_date = rental.start_date.localtime + rental.duration.day %>
+        <% rental_remaining = rental_end_date.localtime - Time.now %>
         <tr>
-          <td><%= product.title %></td>
-          <td><%= variant.title %></td>
-          <td><%= rental.start_date.to_formatted_s(:short) %></td>
+          <td><%= link_to product.title, "http://#{Figaro.env.SHOP_FULL_NAME}/products/#{product.handle}" %></td>
+          <% if variant.title == "Default Title" %>
+            <td>No Sizing</td>
+          <% else %>
+            <td><%= variant.title %></td>
+          <% end %>
+          <td><%= rental_start_date.to_formatted_s(:short) %></td>
           <td><%= rental_end_date.to_formatted_s(:short) %></td>
           <% if rental_remaining > 1.day %>
             <td>
@@ -41,9 +47,14 @@
               </span>
             </td>
           <% end %>
+          <td>
+            <%=link_to "Return", rental_path(rental), method: :delete %>
+          </td>
         </tr>
       <% end %>
       </tbody>
 <% else %>
-<h2> Please log in to view your Rentals Dashboard </h2>
+<br>
+
+<%= image_tag "login.jpg" %>
 <% end %>
